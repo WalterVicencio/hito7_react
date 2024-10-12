@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Navbarr from './Navbar';
 import Footer from './Footer';
 import ReactDOM from "react-dom/client";
-import {Route,Routes} from "react-router-dom";
+import {Route,Routes, Navigate} from "react-router-dom";
 import Home from './Pages/Home';
 import Cart from './Pages/Cart';
 import Login from './Pages/Login';
@@ -15,7 +15,10 @@ import Navegacion from './Navegacion';
 import Profile from './Pages/Profile';
 import NoEncontrada from './Pages/NoEncontrada';
 import CartProvider from './Context/CartContext';
-
+import Cart2 from './Pages/Cart2';
+import { CartContext } from './Context/CartContext';
+import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 //import Cart from './Cart';
 
@@ -24,10 +27,12 @@ import CartProvider from './Context/CartContext';
 
 function App() {
 
+  const {token} =useContext(CartContext);
+  const navigate = useNavigate();
+
   return (
     <>
       <div>
-        <CartProvider>
         <Navegacion />
        {/* <Navbarr />*/} 
         {/*<Home />*/} 
@@ -37,6 +42,10 @@ function App() {
         {/*<Pizza />*/}
         
         <Routes>
+        <Route 
+            path="/home"
+            element={<Home/>}
+          />
         <Route 
             path="/register"
             element={<Register/>}
@@ -54,8 +63,12 @@ function App() {
             element={<Cart/>}
           />
           <Route 
+            path="/pizzas/:id"
+            element={<Cart2/>}
+          />
+          <Route 
             path="/profile"
-            element={<Profile/>}
+            element={token ? <Profile /> : navigate("/home")}
           />
         <Route 
             path="404"
@@ -66,7 +79,6 @@ function App() {
 
 
         <Footer />       
-        </CartProvider>
       </div>  
       
     </>

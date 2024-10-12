@@ -2,10 +2,12 @@ import {useContext, useState } from "react"
 import CardPizza from "../CardPizza"
 import { ListaPizzas } from "../pizzas"
 import { CartContext } from "../Context/CartContext"
-
+import {useParams} from "react-router-dom"
+import Button from 'react-bootstrap/Button';
 
 const Cart = () => {
 
+    const {id} =useParams();
 
     //const { carta, setCarta } = useContext(CartContext);
 
@@ -13,6 +15,7 @@ const Cart = () => {
 
     const {total, setTotal} =useContext(CartContext);
 
+    const {token}=useContext(CartContext);
 
 
     return (
@@ -31,6 +34,7 @@ const Cart = () => {
                         price={pizza.price}
                         ingredients={pizza.ingredients}
                         img={pizza.img}
+                        id={pizza.id}
                         />
                         <h5>Cantidad: {pizza.cantidad}</h5>
                         <button className="btn btn-danger" onClick={()=>{
@@ -50,7 +54,9 @@ const Cart = () => {
             <hr />
             <div>
                     <h3>Total: $ {total} </h3>
-                    <button className="btn btn-success mb-5">Pagar</button>
+
+                    {token==false ? null: <Button className="btn btn-success mb-5">Pagar</Button>}
+
                     </div>
         </div>
 
@@ -62,6 +68,7 @@ const Cart = () => {
             price={pizza.price}
             ingredients={pizza.ingredients}
             img={pizza.img}
+            id={pizza.id}
             />
 
             <button className="btn btn-info" onClick={()=>{

@@ -5,7 +5,7 @@ export const CartContext = createContext();
 const CartProvider = ({ children }) => {
 
 const [carta, setCarta] =useState([])
-
+const [token, setToken] =useState(true);
 const [total, setTotal] =useState(0);
 
   return (
@@ -14,7 +14,9 @@ const [total, setTotal] =useState(0);
         total,
         setTotal,
         carta,
-        setCarta
+        setCarta,
+        token,
+        setToken
       }}
     >
       {children}

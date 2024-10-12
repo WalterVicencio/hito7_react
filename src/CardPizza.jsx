@@ -2,9 +2,14 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import imgpizza from './assets/img/pizza.png';
 import imgcarro from './assets/img/carro.png';
+import { useNavigate} from "react-router-dom";
 
-const CardPizza = ({name,price,ingredients,img})=>{
+const CardPizza = ({name,price,ingredients,img,id})=>{
 
+    const navigate = useNavigate();
+    const irAPizzas = () => {
+      navigate(`/pizzas/${id}`);
+    };
 
     const listado=ingredients.map((ingre)=>
         <li>{ingre},</li>
@@ -22,9 +27,10 @@ const CardPizza = ({name,price,ingredients,img})=>{
         <hr style={{ width: "100%",opacity: .5,color: "grey", backgroundColor: "grey", height: 1}} />
         <h3>Precio: ${price.toLocaleString("de-DE")}</h3>
         <div className='botones-card'>
-        <Button variant="outline-dark">Ver más</Button>
+        <Button variant="outline-dark" onClick={ irAPizzas }>Ver más</Button>
         {/*<Button variant="dark"><img src={imgcarro} style={{width:20,marginRight:5}}></img>Añadir</Button>*/}
         </div>
+      
       </Card.Body>
     </Card>
     )

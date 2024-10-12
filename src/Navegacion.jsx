@@ -12,8 +12,9 @@ import { Link } from "react-router-dom";
 import { CartContext } from './Context/CartContext';
 
 
+
 const Navegacion = () => {
-    const [token, setToken] = useState(false);
+    const {token, setToken} = useContext(CartContext);
 
     const {total} = useContext(CartContext)
 
@@ -27,7 +28,6 @@ const Navegacion = () => {
             <Nav.Link href="./"><Button variant="outline-light"><img src={imgpizza} style={{width:20}}></img>Home</Button>{' '}</Nav.Link>
             <Nav.Link href="./Login"><Button onClick={() => setToken(true)} variant="outline-light"><img src={token==false ? imgcerrado_llave : imgabierto} style={{width:20}}></img>Login</Button>{' '}</Nav.Link>
             {token==false ? <Nav.Link href="#features"><Button variant="outline-light"><img src={imgcerrado_llave} style={{width:20}}></img>Register</Button>{' '}</Nav.Link> : <Nav.Link href="#features"><Button onClick={() => setToken(false)} variant="outline-light"><img src={imgcerrado} style={{width:20}}></img>Logout</Button>{' '}</Nav.Link>}
-            <Nav.Link href="./Register"><Button variant="outline-light">Register</Button></Nav.Link>
             <Nav.Link href="./Profile"><Button variant="outline-light">Profile</Button></Nav.Link>
           </Nav>
           <Nav>
